@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {DecStableCoin} from "./DecStableCoin.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import {DecStableCoin} from "./DecStableCoin.sol";
+import {OracleLib} from "./libraries/OracleLib.sol";
 
 // always: collateral > DSC
 // we can set a threshold (150%) for the collateral to be greater than DSC
@@ -23,6 +24,11 @@ contract DSCEngine is ReentrancyGuard {
     error MintFailed();
     error HealthFactorOk();
     error HealthFactorNotImproved();
+
+    ///////////////////
+    // Types
+    ///////////////////
+    using OracleLib for AggregatorV3Interface;
 
     // state variables
     uint256 private constant LIQUIDATION_THRESHOLD = 50; // This means you need to be 200% over-collateralized
