@@ -8,7 +8,7 @@ Properties:
 - Stability method: algorithmic
 - Collateral: exogenous
 
-Similar to DAI, but with no DAO and no Keepers 😁
+Similar to DAI, but without the DAO and Keepers 😁
 
 Also learned invariant testing on Foundry. check `/test/fuzz`!
 
